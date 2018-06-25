@@ -3,5 +3,5 @@ GET     /                           controllers.HomeController.index
 GET     /server/show        controllers.HomeController.findAll()
 POST    /server/add         controllers.HomeController.add()
 POST    /server/edit        controllers.HomeController.edit()
-GET     /server/remove/:id  controllers.HomeController.remove(id)
+#GET     /server/remove/:id  controllers.HomeController.remove(id)
 

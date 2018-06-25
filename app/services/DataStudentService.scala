@@ -14,7 +14,7 @@ class DataStudentService @Inject()(studentRepo: StudentRepo) extends DataService
 
   override def remove(model: Model): Unit = studentRepo.remove(model)
 
-  override def findAll(): util.List[_] = studentRepo.findAll()
+  override def findAll(): util.List[Student] = studentRepo.findAll().asInstanceOf[util.List[Student]]
 
   def findById(id: Int): Student = studentRepo.getById(id).asInstanceOf[Student]
 }
