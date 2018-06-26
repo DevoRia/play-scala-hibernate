@@ -25,4 +25,10 @@ class Student extends Model {
     this.name = name
     this.group = group
   }
+
+  override def toString = "{"+
+  "\"id\":"+this.id +","+
+  "\"name\":\""+ this.name +"\","+
+  "\"group\":"+ this.group +
+  "}"
 }
