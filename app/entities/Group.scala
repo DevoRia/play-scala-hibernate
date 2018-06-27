@@ -2,7 +2,6 @@ package entities
 
 import javax.persistence._
 
-
 @Entity
 @Table(name = "groups", schema = "library")
 class Group extends Model{
@@ -15,9 +14,8 @@ class Group extends Model{
   @Column(name = "name")
   var name: String = _
 
-  def this(id: Int, name: String) = {
+  def this(name: String) = {
     this()
-    this.id = id
     this.name = name
   }
 

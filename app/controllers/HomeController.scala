@@ -4,11 +4,13 @@ import java.util
 
 import entities.Student
 import javax.inject._
+import play.api.Logger
 import play.api.mvc._
 import services.DataStudentService
 import play.data.DynamicForm
 import play.data.FormFactory
 import play.api.libs.json._
+import play.api.libs.typedmap.TypedKey
 
 import scala.collection.JavaConverters._
 
@@ -31,13 +33,18 @@ class HomeController @Inject()(formFactory: FormFactory,service: DataStudentServ
     Ok(json.toString)
   }
 
-  def add  = Action {
-    service.save(newStudent(formFactory.form().bindFromRequest()))
+  def add  = Action {implicit request =>
+    var name: String = ""
+    var group: String = ""
+    request.body.asMultipartFormData.foreach(e => {
+      e.dataParts("name").foreach(name = _)
+      e.dataParts("group").foreach(group = _)
+    })
+     service.save(newStudent(name, group))
     Ok("Success")
   }
 
   def edit = Action {
-    service.edit(newStudent(formFactory.form().bindFromRequest()))
     Ok("Success")
   }
 
@@ -46,6 +53,6 @@ class HomeController @Inject()(formFactory: FormFactory,service: DataStudentServ
     Ok("Success")
   }
 
-  def newStudent(form: DynamicForm): entities.Student = new entities.Student(form.get("name"), Integer.parseInt(form.get("group")))
+  def newStudent(name: String, group: String): entities.Student = new entities.Student(name, Integer.parseInt(group))
 }
 
