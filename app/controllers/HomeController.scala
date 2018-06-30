@@ -2,6 +2,7 @@ package controllers
 
 import java.util
 
+import entities.Group
 import javax.inject._
 import play.api.mvc._
 import services.DataStudentService
@@ -33,7 +34,10 @@ class HomeController @Inject()(formFactory: FormFactory,service: DataStudentServ
   def edit = Action {implicit request =>
     val name: String = getDataFromRequest(request, "name")
     val group: String = getDataFromRequest(request, "group")
-    service.edit(newStudent(name, group))
+    val id: String = getDataFromRequest(request, "id")
+    val student = newStudent(name, group)
+    student.id = Integer.parseInt(id)
+    service.edit(student)
     Ok("Success")
   }
 
@@ -43,7 +47,7 @@ class HomeController @Inject()(formFactory: FormFactory,service: DataStudentServ
   }
 
   def newStudent(name: String, group: String): entities.Student = {
-    new entities.Student(name, Integer.parseInt(group))
+    new entities.Student(name, 1)
   }
   def getDataFromRequest(request: Request[AnyContent], title: String): String = {
     request.body.asMultipartFormData.get.dataParts(title).foreach(return _)

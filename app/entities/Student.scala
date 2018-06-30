@@ -14,21 +14,20 @@ class Student extends Model {
   @Column(name = "name")
   var name: String = _
 
-  /*@OneToOne
-  @JoinTable(name = "groups")
-  @JoinColumn(name = "name")*/
+/*@ManyToOne
+  @JoinColumn(name = "idgroups")*/
   @Column(name = "\"group\"")
-  var group: Int = _
+  var studentGroup: Int = _
 
   def this(name: String, group: Int) = {
     this()
     this.name = name
-    this.group = group
+    this.studentGroup = group
   }
 
   override def toString = "{"+
   "\"id\":"+this.id +","+
   "\"name\":\""+ this.name +"\","+
-  "\"group\":"+ this.group +
+  "\"group\":"+ this.studentGroup +
   "}"
 }

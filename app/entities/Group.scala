@@ -14,9 +14,17 @@ class Group extends Model{
   @Column(name = "name")
   var name: String = _
 
+ // @OneToMany(targetEntity = classOf[Student], mappedBy = "gg")
+  var students : List[Student] = List()
+
   def this(name: String) = {
     this()
     this.name = name
   }
+
+  override def toString: String = "{"+
+    "\"id\":"+this.id +","+
+    "\"name\":\""+ this.name +"\","+
+    "}"
 
 }
